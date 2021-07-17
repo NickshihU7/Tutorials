@@ -35,6 +35,8 @@ The ESP docker image based on a CentOS 7 Docker image is installed on our server
 
 Each lab member is able to start his/her own ESP docker container with his/her user account. Once a contianer is started, you'll be able to use the ESP. Please follow the instructions below to laucnch the ESP GUI for SoC configurations.
 
+> The Dokcer Engine container comprises just the application and its dependencies. It runs as an isolated process in eserspace on the host OS, sharing the kernel with other containers. Thus, it enjoys the resource isolation and allocation benefits of virtual machines (VMs) but is much more portable and efficient.
+
 1. Run the docker container for ESP.
 	
 		docker run --rm -it --security-opt label=type:container_runtime_t \
@@ -167,3 +169,31 @@ Each lab member is able to start his/her own ESP docker container with his/her u
 		exit
 	
 	Please always remember to exit the docker container before you close the terminal.
+	
+	To make sure the container is removed, please run the command below to list all local containers and their IDs.
+	
+		docker ps -a
+	
+## Useful Docker Commands
+
+* Stop a container:
+
+		docker stop <container-ID>
+
+* Start a container:
+
+		docker start <container-ID>
+
+* Attach to a running container:
+
+		docker attach <container-ID>
+
+* Copy data from host machine to a container:
+
+		docker cp <path-on-host> <container-ID>:/<path-inside-container>
+		
+* Delete a container:
+
+		docker rm -f <container-ID>
+		
+For the complete commands and documents about docoker, please click [here](https://docs.docker.com/engine/reference/run/ "here").
