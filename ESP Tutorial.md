@@ -37,7 +37,7 @@ Each lab member is able to start his/her own ESP docker container with his/her u
 
 > The Dokcer Engine container comprises just the application and its dependencies. It runs as an isolated process in eserspace on the host OS, sharing the kernel with other containers. Thus, it enjoys the resource isolation and allocation benefits of virtual machines (VMs) but is much more portable and efficient.
 
-** 1. Run the docker container for ESP.**
+**1. Run the docker container for ESP.**
 	
 		docker run --rm -it --security-opt label=type:container_runtime_t \
 		--network=host -e DISPLAY=$DISPLAY \
@@ -86,7 +86,7 @@ Each lab member is able to start his/her own ESP docker container with his/her u
 	
 	And you can find all of your local files mounted to `/home/espuser/user`
 	
-** 2. Set up the environment variables with Docker.**
+**2. Set up the environment variables with Docker.**
 
 	For the case you need any CAD tool, you have to set up the paths to access them as follows.
 
@@ -139,7 +139,7 @@ Each lab member is able to start his/her own ESP docker container with his/her u
 	
 	Everything for running ESP is ready now.
 
-** 3. Lauch ESP GUI.**
+**3. Lauch ESP GUI.**
 
 	Select a target FPGA board that you're going to work on.
 	
