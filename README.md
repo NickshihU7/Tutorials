@@ -22,3 +22,71 @@ FPGA prototyping enables the execution of real applications on top of an operati
 Fore more information, please refer to the official [ESP website](https://www.esp.cs.columbia.edu/ "ESP website") as well as the [overview paper on ESP](https://arxiv.org/pdf/2009.01178.pdf "overview paper on ESP").
 
 In their latest paper "[Accelerator Integration for Open-Source SoC Design](https://sld.cs.columbia.edu/pubs/giri_ieeemicro21.pdf "Accelerator Integration for Open-Source SoC Design")," FPGA prototypes of various SoC designs, featuring the NVIDIA Deep Learning Accelerator and the Ariane RISC-V 64-bit processor core are demonstrated.
+
+## How to Use ESP on Our Server
+
+The ESP docker image based on a CentOS 7 Docker image is installed on our server and it contains:
+
+* The installation of all the software packets required by ESP.
+* The installation of utilities like vim, emacs, tmux, socat and minicom, useful when working with ESP.
+* Tn environment variables setup script to be customized with the correct CAD tools paths and licenses.
+* The ESP repository and all its submodules.
+* The installation of the software toolchains for RISC-V and Leon3.
+
+Each lab member is able to start his/her own ESP docker container with his/her user account. Once a contianer is started, you'll be able to use the ESP. Please follow the instructions below to laucnch the ESP GUI for SoC configurations.
+
+1. Run the docker container for ESP.
+	
+		docker run --rm -it --security-opt label=type:container_runtime_t \
+		--network=host -e DISPLAY=$DISPLAY \
+		-v "$HOME/.Xauthority:/root/.Xauthority:rw" \
+		-v /disk2/others/dsd_309591006/:/home/espuser/user \
+		-v /cad/:/home/cad:ro \
+		davidegiri/esp:centos7-full \
+		/bin/bash
+	
+	* Explanation on some important arguments:
+	
+	`--rm` automatically removes the container after you exit it. Otherwise, you'll start a new container everytime you run the docker which will occupy the resource of our workstation.
+	
+	`-it` is neccessary for interactive processes. It actually comes from `-i -t`.
+	
+	`-e DISPLAY=$DISPLAY` provides the container with a DISPLAY environment variable. This instructs X clients – MobaXterm here – which X server to connect to.
+	
+	`-v "$HOME/.Xauthority:/root/.Xauthority:rw"` The volumes commands enable shared filesystems. 
+	
+	> What is the .Xauthority file?
+	
+	> The .Xauthority (not .xAuthority) file can be found in each user home directory and is used to store credentials in cookies used by xauth for authentication of X sessions. Once an X session is started, the cookie is used to authenticate connections to that specific display. You can find more info on X authentication and X authority in the xauth man pages (type man xauth in a terminal).
+	
+	`-v /disk2/others/dsd_your_user_ID/:/home/espuser/user` This volume command mounts your local directory to the `user` directory in docker container. Please avoid mounting the volume to `/home/espuser`. This will overwrite the built-in files uder that directory.
+	
+	`-v /cad/:/home/cad:ro`
+	
+	`davidegiri/esp:centos7-full`
+	
+	`/bin/bash` runs
+
+
+	You might want to put this in a shell script under your directory so that you don't have to look it up everytime and name the file as, say, `esp_docker.sh` Then you can simply run the shell script to run the docker with the command below.
+	
+		sh esp_docker.sh
+	
+
+	Once you looged in tp the server, do:
+	
+	`[dsd_your_user_id@icst5050 ~]$ sh esp_docker.sh`
+	
+	You're now in the container with the directory of `/home/espuser` and should be able to see:
+	
+	`root@icst5050:/home/espuser$`
+	
+	You can use `ls` command to see what's in there. 
+	
+2. Set up the environment variables with Docker.
+
+3. Lauch ESP GUI.
+
+4. Leave the docker.
+
+		exit
