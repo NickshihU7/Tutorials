@@ -58,6 +58,7 @@ Each lab member is able to start his/her own ESP docker container with his/her u
 		`-v "$HOME/.Xauthority:/root/.Xauthority:rw"` The volumes commands enable shared filesystems. 
 
 		> What is the .Xauthority file?
+		
 		The .Xauthority (not .xAuthority) file can be found in each user home directory and is used to store credentials in cookies used by xauth for authentication of X sessions. Once an X session is started, the cookie is used to authenticate connections to that specific display. You can find more info on X authentication and X authority in the xauth man pages (type man xauth in a terminal).
 
 		`-v /disk2/others/dsd_your_user_ID/:/home/espuser/user` mounts your local directory to the `/home/espuser/user` directory in docker container. Please avoid mounting the volume to `/home/espuser`. This will overwrite the built-in files uder that directory.
