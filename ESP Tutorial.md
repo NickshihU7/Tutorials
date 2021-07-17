@@ -196,3 +196,7 @@ Each lab member is able to start his/her own ESP docker container with his/her u
 		docker rm -f <container-ID>
 		
 For the complete commands and documents about docoker, please click [here](https://docs.docker.com/engine/reference/run/ "here").
+
+## Revision History
+
+* v0.1 - 2021/07/17, written by Nick Shih
