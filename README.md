@@ -140,7 +140,8 @@ Each lab member is able to start his/her own ESP docker container with his/her u
 3. Lauch ESP GUI.
 
 	Select a target FPGA board that you're going to work on.
-	The supported boards:
+	
+	The supported boards are listed below.
 	
 	* Xilinx Virtex UltraScale+ FPGA VCU118 and VCU128
 	* Xilinx Virtex-7 FPGA VC707
@@ -155,12 +156,13 @@ Each lab member is able to start his/her own ESP docker container with his/her u
 	
 	You should be able to see the GUI like this:
 	
-	
-
+	<div align="center">
+	<img src="https://i.ibb.co/j32nXLZ/howto-singlecore-vc707-espgui.png" alt="howto-singlecore-vc707-espgui" border="0">
+	</div>
 
 4. Leave the docker.
 
-	To leave the container and go back to your workstation, just do:
+	To leave the container and go back to your user, just do:
 	
 		exit
 	
