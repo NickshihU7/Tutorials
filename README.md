@@ -74,19 +74,94 @@ Each lab member is able to start his/her own ESP docker container with his/her u
 
 	Once you logged into the server, do:
 	
-	`[dsd_your_user_id@icst5050 ~]$ sh esp_docker.sh`
+		[dsd_your_user_id@icst5050 ~]$ sh esp_docker.sh
 	
 	You're now in the container with the directory of `/home/espuser` and should be able to see:
 	
-	`root@icst5050:/home/espuser$`
+		root@icst5050:/home/espuser$
 	
 	You can use `ls` command to see what's in there.
-	And you'll find all of your files in `/home/espuser/user`
+	
+	And you can find all of your local files mounted to `/home/espuser/user`
 	
 2. Set up the environment variables with Docker.
 
+	For the case you need any CAD tool, you have to set up the paths to access them as follows.
+
+		#
+		# Set ESP environment variables (with CAD tools)
+		# 
+
+		# Cadence: Stratus HLS, Incisive, XCelium
+		# e.g. <stratus_path> = /opt/cadence/stratus182
+		# e.g. <incisive_path> = /opt/cadence/incisive152
+		# e.g. <xcelium_path> = /opt/cadence/xcelium18
+		export LM_LICENSE_FILE=$LM_LICENSE_FILE:/home/cad/cadence/CIC/
+		export PATH=$PATH:/home/cad/cadence/STRATUS/STRATUS_17.21.100/bin:/home/cad/cadence/INCISIV/INCISIVE_15.20.039/tools/cdsgcc/gcc/bin
+		#:<xcelium_path>/tools/cdsgcc/gcc/bin
+		export CDS_AUTO_64BIT=all
+		# export HOST=$(hostname) # for Ubuntu only
+
+		# Xilinx: Vivado, Vivado HLS
+		# e.g. <vivado_path> = /opt/xilinx/Vivado/2018.2
+		export XILINXD_LICENSE_FILE=/home/cad/xilinx/
+		source /home/cad/xilinx/Vivado/2019.2/settings64.sh
+
+		# Mentor: Catapult HLS, Modelsim
+		# e.g. <modelsim_path> = /opt/mentor/modeltech
+		# e.g. <catapult_path> = /opt/mentor/catapult
+		export LM_LICENSE_FILE=$LM_LICENSE_FILE:/home/cad/mentor/CIC/
+		export PATH=$PATH:/home/cad/mentor/modelsim/2020.1/modeltech/bin
+		export AMS_MODEL_TECH=/home/cad/mentor/modelsim/2020.1/modeltech/
+		export PATH=$PATH:/home/cad/mentor/Catapult/10.3d/bin
+		export SYSTEMC=/home/cad/mentor/Catapult/10.3d/shared
+		export SYSTEMC_HOME=/home/cad/mentor/Catapult/10.3d/shared
+		export MGC_HOME=/home/cad/mentor/Catapult/10.3d/
+		export LIBDIR=-L/home/cad/mentor/Catapult/10.3d/shared/lib $LIBDIR
+
+		# RISC-V toolchain
+		export RISCV=/home/espuser/riscv
+		export PATH=$PATH:/home/espuser/riscv/bin
+
+		# LEON3 toolchain
+		export PATH=$PATH:/home/espuser/leon/bin
+		export PATH=$PATH:/home/espuser/leon/mklinuximg
+		export PATH=$PATH:/home/espuser/leon/sparc-elf/bin
+
+	Please copy-paste the commands above into a shell script, say, `esp_env_cad.sh` and put the shell script under your local root directory. Then you'll be able to find it in `/home/espuser/user`.
+	
+	Next, change directory to `/home/espuser/user` and source the environment variables.
+	
+		root@icst5050:/home/espuser$ cd user	
+		root@icst5050:/home/espuser/user$ source esp_env_cad.sh
+	
+	Everything for running ESP is ready now.
+
 3. Lauch ESP GUI.
+
+	Select a target FPGA board that you're going to work on.
+	The supported boards:
+	
+	* Xilinx Virtex UltraScale+ FPGA VCU118 and VCU128
+	* Xilinx Virtex-7 FPGA VC707
+	* proFPGA Virtex7 XC7V2000T FPGA
+	* proFPGA Virtex Ultrascale XCVU440 FPGA
+	
+	The `esp/socs/` directory of ESP contains a working folder for each of the target FPGA boards.
+	For this tutorial we target the popular Xilinx VC707 evaluation board based on the Virtex7 FPGA.
+	
+		root@icst5050:/home/espuser$ cd /home/espuser/esp/socs/xilinx-vc707-xc7vx485t
+		root@icst5050:/home/espuser/esp/socs/xilinx-vc707-xc7vx485t$ make esp-xconfig
+	
+	You should be able to see the GUI like this:
+	
+	
+
 
 4. Leave the docker.
 
+	To leave the container and go back to your workstation, just do:
+	
 		exit
+	
+	Please always remember to exit the docker container before you close the terminal.
