@@ -10,7 +10,7 @@ This tutorial provides a step-by-step instruction on how to launch the ESP GUI f
 <img src="https://i.ibb.co/pjx2mLm/esp-overview.png" alt="esp-overview" border="0">
 </div>
 
-In other words, it is a platform that integrates the full design flow of chip development. It provides 3 design flows, including RTL (Chisel, SystemVerilog, VHDL), HLS (High Level Synthesis) with C/C++ or SystemC, and Machine learning frameworks (Keras TensorFLow, Pytorch). You can choose whichever more is more suitable to your scenario.
+In other words, it is a platform that integrates the full design flow of chip development. It provides 3 design flows, including RTL (Chisel, SystemVerilog, VHDL), HLS (High Level Synthesis) with C/C++ or SystemC, and Machine learning frameworks (Keras TensorFLow, Pytorch). You can choose whichever is more suitable to your scenario.
 
 To prototype your design, ESP also provides a SoC integration flow which automatically generates a tile-based NoC (Network-on-Chip) configured by the desiner. It comes with a GUI which guides designers to configure their own SoC with the choices of CPU, accelerator, memory and auxiliary tiles.
 
@@ -68,12 +68,10 @@ Each lab member is able to start his/her own ESP docker container with his/her u
 
 		`/bin/bash` runs the bash file automatically once we're in the container.
 
-
 	You might want to put this in a shell script under your directory so that you don't have to look it up everytime and name the file as, say, `esp_docker.sh` Then you can simply run the shell script to run the docker with the command below.
 	
 		sh esp_docker.sh
 	
-
 	Once you logged into the server, do:
 	
 		[dsd_your_user_id@icst5050 ~]$ sh esp_docker.sh
