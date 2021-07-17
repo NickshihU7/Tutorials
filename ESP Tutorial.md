@@ -162,7 +162,7 @@ Each lab member is able to start his/her own ESP docker container with his/her u
 	<img src="https://i.ibb.co/j32nXLZ/howto-singlecore-vc707-espgui.png" alt="howto-singlecore-vc707-espgui" border="0">
 	</div>
 
-** 4. Leave the docker.**
+4. **Leave the docker.**
 
 	To leave the container and go back to your user, just do:
 	
