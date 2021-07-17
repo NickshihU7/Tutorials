@@ -47,25 +47,24 @@ Each lab member is able to start his/her own ESP docker container with his/her u
 	
 	* Explanation on some important arguments:
 	
-	`--rm` automatically removes the container after you exit it. Otherwise, you'll start a new container everytime you run the docker which will occupy the resource of our workstation.
-	
-	`-it` is neccessary for interactive processes. It actually comes from `-i -t`.
-	
-	`-e DISPLAY=$DISPLAY` provides the container with a DISPLAY environment variable. This instructs X clients – MobaXterm here – which X server to connect to.
-	
-	`-v "$HOME/.Xauthority:/root/.Xauthority:rw"` The volumes commands enable shared filesystems. 
-	
-	> What is the .Xauthority file?
-	
-	> The .Xauthority (not .xAuthority) file can be found in each user home directory and is used to store credentials in cookies used by xauth for authentication of X sessions. Once an X session is started, the cookie is used to authenticate connections to that specific display. You can find more info on X authentication and X authority in the xauth man pages (type man xauth in a terminal).
-	
-	`-v /disk2/others/dsd_your_user_ID/:/home/espuser/user` This volume command mounts your local directory to the `user` directory in docker container. Please avoid mounting the volume to `/home/espuser`. This will overwrite the built-in files uder that directory.
-	
-	`-v /cad/:/home/cad:ro`
-	
-	`davidegiri/esp:centos7-full`
-	
-	`/bin/bash` runs
+		`--rm` automatically removes the container after you exit it. Otherwise, you'll start a new container everytime you run the docker which will occupy the resource of our workstation.
+
+		`-it` is neccessary for interactive processes. It actually comes from `-i -t`.
+
+		`-e DISPLAY=$DISPLAY` provides the container with a DISPLAY environment variable. This instructs X clients – MobaXterm here – which X server to connect to.
+
+		`-v "$HOME/.Xauthority:/root/.Xauthority:rw"` The volumes commands enable shared filesystems. 
+
+		> What is the .Xauthority file?
+		The .Xauthority (not .xAuthority) file can be found in each user home directory and is used to store credentials in cookies used by xauth for authentication of X sessions. Once an X session is started, the cookie is used to authenticate connections to that specific display. You can find more info on X authentication and X authority in the xauth man pages (type man xauth in a terminal).
+
+		`-v /disk2/others/dsd_your_user_ID/:/home/espuser/user` mounts your local directory to the `/home/espuser/user` directory in docker container. Please avoid mounting the volume to `/home/espuser`. This will overwrite the built-in files uder that directory.
+
+		`-v /cad/:/home/cad:ro` mounts the directory of all the CAD tools on our server to the `/home/cad` directory in docker container. To avoid any issue, `:ro` is added to keep it as read-only.
+
+		`davidegiri/esp:centos7-full` specifies the docker image we're going to use `esp:centos7-full`
+
+		`/bin/bash` runs the bash file automatically once we're in the container.
 
 
 	You might want to put this in a shell script under your directory so that you don't have to look it up everytime and name the file as, say, `esp_docker.sh` Then you can simply run the shell script to run the docker with the command below.
@@ -73,7 +72,7 @@ Each lab member is able to start his/her own ESP docker container with his/her u
 		sh esp_docker.sh
 	
 
-	Once you looged in tp the server, do:
+	Once you logged into the server, do:
 	
 	`[dsd_your_user_id@icst5050 ~]$ sh esp_docker.sh`
 	
@@ -81,7 +80,8 @@ Each lab member is able to start his/her own ESP docker container with his/her u
 	
 	`root@icst5050:/home/espuser$`
 	
-	You can use `ls` command to see what's in there. 
+	You can use `ls` command to see what's in there.
+	And you'll find all of your files in `/home/espuser/user`
 	
 2. Set up the environment variables with Docker.
 
